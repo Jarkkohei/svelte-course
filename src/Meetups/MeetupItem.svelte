@@ -62,6 +62,10 @@
   div {
     text-align: right;
   }
+
+  .content {
+      height: 4rem;
+  }
 </style>
 
 <article>
@@ -74,7 +78,7 @@
         <img src="{imageUrl}" alt="{title}">
     </div>
     <div class="content">
-        <p></p>
+        <p>{description}</p>
     </div>
     <footer>
         <Button href="mailto:{contactEmail}" caption="Contact" />
