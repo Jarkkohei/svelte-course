@@ -8,7 +8,7 @@
             title: 'Coding bootcamp',
             subtitle: 'Learn to code in 2 hours',
             description: 'In this meetup we have experts to teach us how to code.',
-            imageUrl: 'https://commons.wikimedia.org/wiki/File:Meetup_Logo_2015.png',
+            imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Meetup_Logo.png',
             address: '27th Nerd Road, 432543 New York',
             contactEmail: 'code@test.com',
         },
