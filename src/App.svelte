@@ -34,7 +34,7 @@
 
 <section id="meetups">
     {#each meetups as meetup}
-        <MeetupItem />
+        <MeetupItem {...meetup}/>
     {/each}
 </section>
 
