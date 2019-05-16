@@ -1,6 +1,7 @@
 <script>
     import Header from './UI/Header.svelte';
     import MeetupGrid from './Meetups/MeetupGrid.svelte';
+    import TextInput from './UI/TextInput.svelte';
 
     let title = '';
     let subtitle = '';
@@ -49,41 +50,61 @@
     main {
         margin-top: 5rem;
     }
+
+    form {
+        width: 30rem;
+        max-width: 90%;
+        margin: auto;
+    }
 </style>
 
 <Header />
 
 <main>
     <form on:submit|preventDefault="{addMeetup}">
-        <div class="form-control">
-            <label for="title">Title</label>
-            <input type="text" id="title" bind:value={title}>
-        </div>
 
-        <div class="form-control">
-            <label for="subtitle">Subtitle</label>
-            <input type="text" id="subtitle" bind:value={subtitle}>
-        </div>
+        <TextInput 
+            id="title"  
+            label="Title" 
+            value="{title}"
+            inputType="text"
+            on:input="{event => (title = event.target.value)}" />
 
-        <div class="form-control">
-            <label for="address">Address</label>
-            <input type="text" id="address" bind:value={address}>
-        </div>
+        <TextInput 
+            id="subtitle" 
+            label="Subtitle" 
+            value="{subtitle}"
+            inputType="text"
+            on:input="{event => (subtitle = event.target.value)}" />
 
-        <div class="form-control">
-            <label for="imageUrl">Image URL</label>
-            <input type="url" id="imageUrl" bind:value={imageUrl}>
-        </div>
+        <TextInput 
+            id="address" 
+            label="Address" 
+            value="{address}"
+            inputType="text"
+            on:input="{event => (address = event.target.value)}" />
 
-        <div class="form-control">
-            <label for="contactEmail">E-mail</label>
-            <input type="email" id="contactEmail" bind:value={email}>
-        </div>
+        <TextInput 
+            id="imageUrl"  
+            label="Image URL"
+            value="{imageUrl}"
+            inputType="url"
+            on:input="{event => (imageUrl = event.target.value)}" />
 
-        <div class="form-control">
-            <label for="description">Description</label>
-            <textarea rows="3" id="description"  bind:value={description}/>
-        </div>
+        <TextInput 
+            id="contactEmail"  
+            label="E-mail"  
+            value="{email}"
+            inputType="email"
+            on:input="{event => (email = event.target.value)}" />
+
+        <TextInput 
+            id="description" 
+            controlType="textarea" 
+            label="Description" 
+            rows="3" 
+            value="{description}"
+            on:input="{event => (description = event.target.value)}" />
 
         <button type="submit">Save</button>
 
