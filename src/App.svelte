@@ -20,6 +20,7 @@
             imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Meetup_Logo.png',
             address: '27th Nerd Road, 432543 New York',
             contactEmail: 'code@test.com',
+            isFavorite: false,
         },
         {
             id: 'm2',
@@ -29,6 +30,7 @@
             imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Meetup_Logo.png',
             address: '27th Nerd Road, 432543 New York',
             contactEmail: 'code@test.com',
+            isFavorite: false,
         }
     ];
 
@@ -44,6 +46,16 @@
         };
 
         meetups = [newMeetup, ...meetups];
+    }
+
+    function toggleFavorite(event) {
+        const id = event.detail;
+        const updatedMeetup = { ...meetups.find(m => m.id === id) };
+        updatedMeetup.isFavorite = !updatedMeetup.isFavorite;
+        const meetupIndex = meetups.findIndex(m => m.id === id);
+        const updatedMeetups = [...meetups];
+        updatedMeetups[meetupIndex] = updatedMeetup;
+        meetups = updatedMeetups;
     }
 </script>
 
@@ -107,7 +119,7 @@
         <Button type="submit" caption="Save" />
 
     </form>
-    <MeetupGrid id="meetups" {meetups} />
+    <MeetupGrid id="meetups" {meetups} on:togglefavorite="{toggleFavorite}"/>
 </main>
 
 
