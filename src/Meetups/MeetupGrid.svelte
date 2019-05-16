@@ -9,7 +9,7 @@
         width: 100%;
         display: grid;
         grid-template-columns: 1fr;
-        grid-gap: 1rem;
+        /*grid-gap: 1rem;*/
      }
 
      @media (min-width: 768px) {
