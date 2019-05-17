@@ -1,16 +1,9 @@
 <script>
     import Header from './UI/Header.svelte';
     import MeetupGrid from './Meetups/MeetupGrid.svelte';
-    import TextInput from './UI/TextInput.svelte';
+    import EditMeetup from './Meetups/EditMeetup.svelte';
     import Button from './UI/Button.svelte';
-
-    let title = '';
-    let subtitle = '';
-    let address = '';
-    let imageUrl = '';
-    let email = '';
-    let description = '';
-
+    
     let meetups = [
         {
             id: 'm1',
@@ -34,22 +27,18 @@
         }
     ];
 
-    function addMeetup() {
-        const newMeetup = {
-            id: Math.random().toString(),
-            title: title,
-            subtitle: subtitle,
-            address: address,
-            imageUrl: imageUrl,
-            contactEmail: email,
-            description: description
-        };
+    let editMode;
 
+    function addMeetup(event) {
+
+        console.log(event.detail);
+        const newMeetup = event.detail;
         meetups = [newMeetup, ...meetups];
+        editMode = null;
     }
 
     function toggleFavorite(event) {
-        const id = event.detail;
+        const id = event.details;
         const updatedMeetup = { ...meetups.find(m => m.id === id) };
         updatedMeetup.isFavorite = !updatedMeetup.isFavorite;
         const meetupIndex = meetups.findIndex(m => m.id === id);
@@ -64,62 +53,23 @@
         margin-top: 5rem;
     }
 
-    form {
-        width: 30rem;
-        max-width: 90%;
-        margin: auto;
+    .meetup-controls {
+        margin: 1rem;
     }
 </style>
 
 <Header />
 
 <main>
-    <form on:submit|preventDefault="{addMeetup}">
-
-        <TextInput 
-            id="title"  
-            label="Title" 
-            value="{title}"
-            on:input="{event => (title = event.target.value)}" />
-
-        <TextInput 
-            id="subtitle" 
-            label="Subtitle" 
-            value="{subtitle}"
-            on:input="{event => (subtitle = event.target.value)}" />
-
-        <TextInput 
-            id="address" 
-            label="Address" 
-            value="{address}"
-            on:input="{event => (address = event.target.value)}" />
-
-        <TextInput 
-            id="imageUrl"  
-            label="Image URL"
-            value="{imageUrl}"
-            inputType="url"
-            on:input="{event => (imageUrl = event.target.value)}" />
-
-        <TextInput 
-            id="contactEmail"  
-            label="E-mail"  
-            value="{email}"
-            inputType="email"
-            on:input="{event => (email = event.target.value)}" />
-
-        <TextInput 
-            id="description" 
-            controlType="textarea" 
-            label="Description" 
-            rows="3" 
-            value="{description}"
-            on:input="{event => (description = event.target.value)}" />
-
-        <Button type="submit" caption="Save" />
-
-    </form>
-    <MeetupGrid id="meetups" {meetups} on:togglefavorite="{toggleFavorite}"/>
+    <div class="meetup-controls">
+        <Button caption="New Meetup" on:click="{ () =>  editMode = 'add' }" />
+    </div>
+    
+    {#if editMode === 'add'}
+        <EditMeetup on:save={addMeetup} />
+    {/if}
+    
+    <MeetupGrid id="meetups" {meetups} on:togglefavorite="{toggleFavorite}" />
 </main>
 
 
