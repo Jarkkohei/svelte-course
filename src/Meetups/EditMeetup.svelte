@@ -25,12 +25,16 @@
     let description = '';
     let descriptionValid = false;
 
+    let formIsValid = false;
+
     $: titleValid = !isEmpty(title);
     $: subtitleValid = !isEmpty(subtitle);
     $: addressValid = !isEmpty(address);
     $: imageUrlValid = !isEmpty(imageUrl);
     $: emailValid = isValidEmail(email);
     $: descriptionValid = !isEmpty(description);
+
+    $: formIsValid = titleValid && subtitleValid && addressValid && imageUrlValid && emailValid && descriptionValid;
 
     function submitForm() {
         dispatch('save', {
@@ -111,6 +115,6 @@
 
     <div slot="footer">
         <Button type="button" mode="outline" on:click={cancel}>Cancel</Button>
-        <Button type="button" on:click={submitForm}>Save</Button>
+        <Button type="button" on:click={submitForm} disabled={!formIsValid}>Save</Button>
     </div>
 </Modal>
