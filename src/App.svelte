@@ -30,15 +30,13 @@
     let editMode;
 
     function addMeetup(event) {
-
-        console.log(event.detail);
         const newMeetup = event.detail;
         meetups = [newMeetup, ...meetups];
         editMode = null;
     }
 
     function toggleFavorite(event) {
-        const id = event.details;
+        const id = event.detail;
         const updatedMeetup = { ...meetups.find(m => m.id === id) };
         updatedMeetup.isFavorite = !updatedMeetup.isFavorite;
         const meetupIndex = meetups.findIndex(m => m.id === id);
