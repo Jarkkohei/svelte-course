@@ -4,7 +4,7 @@
     export let label;
     export let rows = null;
     export let value;
-    export let inputType = 'text';
+    export let type = 'text';
     export let valid = true;
     export let validityMessage = '';
 
@@ -57,9 +57,9 @@
 <div class="form-control">
         <label for="{id}">{label}</label>
     {#if controlType === 'textarea'}
-        <textarea class:invalid="{!valid && touched}" rows="{rows}" id="{id}" value={value} on:input on:blur={() => touched = true} />
+        <textarea class:invalid="{!valid && touched}" {rows}" {id}" bind:value on:input on:blur={() => touched = true} />
     {:else}
-        <input class:invalid="{!valid && touched}" type="{inputType}" id="{id}" value={value} on:input on:blur={() => touched = true} />
+        <input class:invalid="{!valid && touched}" {type} {id} {value} on:input on:blur={() => touched = true} />
     {/if}
 
     {#if validityMessage && !valid && touched}

@@ -95,9 +95,8 @@
             label="Description" 
             rows="3" 
             value="{description}"
-            valid={descriptionValid}
-            validityMessage="Please enter a valid description."
-            on:input="{event => (description = event.target.value)}" />
+            bind:valid={descriptionValid}
+            validityMessage="Please enter a valid description." />
     </form>
 
     <div slot="footer">
