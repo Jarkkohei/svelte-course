@@ -61,8 +61,11 @@
     }
 
     function deleteMeetup() {
-        meetups.deleteMeetup(id);
-        dispatch('save');
+        let confirmed = confirm("Are you sure you want to delete this meetup?");
+        if(confirmed) {
+            meetups.deleteMeetup(id);
+            dispatch('save');
+        }
     }
 
     function cancel() {
