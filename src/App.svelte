@@ -8,8 +8,6 @@
     let editMode;
 
     function addMeetup(event) {
-        const meetupData = event.detail;
-        meetups.addMeetup(meetupData);
         editMode = null;
     }
 
