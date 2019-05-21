@@ -2,6 +2,8 @@
 
 Udemy - Svelte.js - The Complete Guide -course project
 
+---
+
 ## Install
 
 clone the repo and cd to project folder
@@ -9,6 +11,20 @@ clone the repo and cd to project folder
 ```
     $ npm install
 ```
+
+Create a Firebase project with realtime database and add ``env.js`` -file with following markup, to the root directory of the Svelte project.
+
+Replace the ``<YOUR_FIREBASE_PROJECT_DATABASE_URL_HERE>`` with your Firebase Database Url.
+
+```javascript
+const environment = {
+    FIREBASE_BASE_URL: '<YOUR_FIREBASE_PROJECT_DATABASE_URL_HERE>'
+};
+
+export default environment;
+```
+
+---
 
 ## Run
 
