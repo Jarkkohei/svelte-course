@@ -33,6 +33,10 @@
         justify-content: space-between;
     }
 
+    #no-meetups {
+        margin: 1rem;
+    }
+
     @media (min-width: 768px) {
         #meetups {
             grid-template-columns: repeat(2, 1fr);
@@ -45,6 +49,9 @@
     <Button on:click="{ () =>  dispatch('add') }">New Meetup</Button>
 </section>
 
+{#if filteredMeetups.length === 0}
+    <p id="no-meetups">No meetups found.</p>
+{/if}
 <section id="meetups">
     {#each filteredMeetups as meetup (meetup.id)}
         <div transition:scale animate:flip={{duration: 300}}>
