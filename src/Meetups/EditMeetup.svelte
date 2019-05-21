@@ -6,6 +6,8 @@
     import Modal from '../UI/Modal.svelte';
     import { isEmpty, isValidEmail } from '../helpers/validation.js';
 
+    import env from '../../env.js';
+
     const dispatch = createEventDispatcher();
 
     export let id = null;
