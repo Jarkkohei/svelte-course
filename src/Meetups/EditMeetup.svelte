@@ -56,7 +56,23 @@
         if(id) {
             meetups.updateMeetup(id, meetupData);
         } else {
-            meetups.addMeetup(meetupData);
+            fetch(env.FIREBASE_DATABASE_URL + 'meetups.json', {
+                method: 'POST',
+                body: JSON.stringify({...meetupData, isFavorite: false}),
+                headers: {'Content-Type': 'application/json'}
+            })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('An error occurred. Please try again!');
+                }
+                return res.json();
+            })
+            .then(data => {
+                 meetups.addMeetup({...meetupData, isFavorite: false, id: data.name});
+            })
+            .catch(err => { 
+                console.log(err)
+            });
         }
 
         dispatch('save');
