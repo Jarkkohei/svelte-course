@@ -5,6 +5,7 @@
     import EditMeetup from './Meetups/EditMeetup.svelte';
     import Button from './UI/Button.svelte';
     import MeetupDetail from './Meetups/MeetupDetail.svelte';
+    import LoadingSpinner from './UI/LoadingSpinner.svelte';
 
     import env from '../env';
 
@@ -13,6 +14,7 @@
 
     let page = 'overview';
     let pageData = {};
+    let isLoading = true;
 
     fetch(env.FIREBASE_DATABASE_URL + 'meetups.json')
         .then(res => {
@@ -29,9 +31,11 @@
                     id: key
                 });
             }
+            isLoading = false;
             meetups.setMeetups(loadedMeetups);
         })
         .catch(err => {
+            isLoading = false;
             console.log(err); 
         });
 
@@ -75,8 +79,11 @@
     {#if editMode === 'edit'}
         <EditMeetup id={editedId} on:save={saveMeetup} on:cancel={cancelEdit} />
     {/if}
-    
-    <MeetupGrid id="meetups" meetups={$meetups} on:showdetails={showDetails} on:edit={startEdit} on:add={() => {editMode = 'edit'}} />
+    {#if isLoading}
+        <LoadingSpinner />
+    {:else}
+        <MeetupGrid id="meetups" meetups={$meetups} on:showdetails={showDetails} on:edit={startEdit} on:add={() => {editMode = 'edit'}} />
+    {/if}
 {:else}
     <MeetupDetail id={pageData.id} on:close={closeDetails}/>
 {/if}
