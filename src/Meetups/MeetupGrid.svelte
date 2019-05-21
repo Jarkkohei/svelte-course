@@ -44,7 +44,7 @@
 </section>
 
 <section id="meetups">
-    {#each filteredMeetups as meetup}
+    {#each filteredMeetups as meetup (meetup.id)}
         <MeetupItem {...meetup} on:showdetails on:edit />
     {/each}
 </section>
