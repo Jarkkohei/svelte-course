@@ -94,7 +94,18 @@
     function deleteMeetup() {
         let confirmed = confirm("Are you sure you want to delete this meetup?");
         if(confirmed) {
-            meetups.deleteMeetup(id);
+            fetch(env.FIREBASE_DATABASE_URL + 'meetups/' + id + '.json', {
+                method: 'DELETE'
+            })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('An error occurred. Please try again!');
+                }
+                meetups.deleteMeetup(id);
+            })
+            .catch(err => { 
+                console.log(err)
+            });
             dispatch('save');
         }
     }
