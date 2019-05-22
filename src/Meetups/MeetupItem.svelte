@@ -4,6 +4,8 @@
     import Button from '../UI/Button.svelte';
     import Badge from '../UI/Badge.svelte';
 
+    import env from '../../env.js';
+
     export let id;
     export let title;
     export let subtitle;
@@ -16,7 +18,20 @@
     const dispatch = createEventDispatcher();
 
     function toggleFavorite() {
-        meetups.toggleFavorite(id);
+        fetch(env.FIREBASE_DATABASE_URL + 'meetups/' + id + '.json', {
+            method: 'PATCH',
+            body: JSON.stringify({isFavorite: !isFavorite}),
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => {
+            if(!res.ok) {
+                throw new Error('An error occurred. Please try again!');
+            }
+            meetups.toggleFavorite(id);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 </script>
 
