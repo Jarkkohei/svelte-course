@@ -24,6 +24,8 @@ const environment = {
 export default environment;
 ```
 
+This file can be used to also store other constants, although be aware that they will be visible in the bundle.js -file as a plain text.
+
 ---
 
 ## Run
